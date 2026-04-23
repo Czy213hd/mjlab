@@ -674,6 +674,10 @@ document.write(`
       <span class="bp">self</span><span class="o">.</span><span class="n">_sensors</span><span class="p">[</span><span class="n">sensor_cfg</span><span class="o">.</span><span class="n">prefixed_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">sns</span>
 
     <span class="k">for</span> <span class="n">sns</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spec</span><span class="o">.</span><span class="n">sensors</span><span class="p">:</span>
+      <span class="c1"># Some third-party XMLs define unnamed sensors. MuJoCo accepts these, but</span>
+      <span class="c1"># Python-side lookup by name fails for empty strings.</span>
+      <span class="k">if</span> <span class="ow">not</span> <span class="n">sns</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+        <span class="k">continue</span>
       <span class="k">if</span> <span class="n">sns</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sensors</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sensors</span><span class="p">[</span><span class="n">sns</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">BuiltinSensor</span><span class="o">.</span><span class="n">from_existing</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
 
