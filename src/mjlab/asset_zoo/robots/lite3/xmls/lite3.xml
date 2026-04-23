@@ -1,0 +1,3 @@
+<mujoco model="lite3_scene">
+  <include file="../../../../../../deep_robotics_model/Lite3/Lite3_mjcf/mjcf/Lite3.xml"/>
+</mujoco>

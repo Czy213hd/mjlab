@@ -259,5 +259,9 @@ class Scene:
       self._sensors[sensor_cfg.prefixed_name] = sns
 
     for sns in self._spec.sensors:
+      # Some third-party XMLs define unnamed sensors. MuJoCo accepts these, but
+      # Python-side lookup by name fails for empty strings.
+      if not sns.name:
+        continue
       if sns.name not in self._sensors:
         self._sensors[sns.name] = BuiltinSensor.from_existing(sns.name)
